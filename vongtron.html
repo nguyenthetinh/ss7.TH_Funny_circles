@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500px" height="500px" style="border:10px solid firebrick;"></canvas>
+<script>
+    let canvas=document.getElementById("myCanvas");
+    let text=canvas.getContext('2d');
+    let sy=[];
+    let sx=[];
+    let toadoX=[];
+    let toadoY=[];
+    let toadobankinh=[];
+    let color;
+    let sohinhtron=Number(prompt("Nhap so hinh tron:"));
+    let tron=new hinhtron();
+
+
+
+    function hinhtron() {
+        this.tao = function (x,y,bankinh) {
+            text.beginPath();
+            text.arc(x , y , bankinh , 0 , 2*Math.PI);
+            text.fillStyle=mauhinhtron();
+            text.fill();
+        }
+    }
+
+    function ngaunhienmau() {
+        return Math.random()*255
+    }
+    function mauhinhtron() {
+        let red=ngaunhienmau();
+        let blue=ngaunhienmau();
+        let black=ngaunhienmau();
+        return "rgb("+red+","+blue+","+black+")"
+    }
+    for (let i=0;i<sohinhtron;i++){
+        toadoX[i] = Math.floor(Math.random() * 500);
+        toadoY [i] = Math.floor(Math.random() * 500);
+        toadobankinh[i] = 20;
+        sy[i] = Math.floor(Math.random() * 10 + 5);
+        sx[i] = Math.floor(Math.random() * 5 +5);
+    }
+    function dichchuyen() {
+        text.clearRect(0,0,canvas.width,canvas.height);
+
+        for (let i=0;i<sohinhtron;i++){
+            toadoX[i] +=sx[i];
+            toadoY[i] +=sy[i];
+            if (toadoX[i] > 500 || toadoX[i] < 0) sx[i]=-sx[i];
+            if (toadoY[i] > 500 || toadoY[i] < 0) sy[i]=-sy[i] ;
+            tron.tao(toadoX[i],toadoY[i],toadobankinh[i],color);
+
+        }
+        chay();
+    }
+    function chay() {
+        setTimeout(dichchuyen,100);
+    }
+    chay();
+</script>
+</body>
+</html>
